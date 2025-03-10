@@ -4,7 +4,8 @@ const express = require("express");
 const nodemailer = require("nodemailer");
 const cors = require("cors");
 const app = express();
-const PORT = 2020;
+
+const PORT = process.env.PORT || 2020; // Use Render's assigned port
 
 // Load credentials securely from .env
 const serviceEmail = process.env.SERVICE_EMAIL;
@@ -51,4 +52,4 @@ app.post("/send-email", (req, res) => {
 });
 
 // Start server
-app.listen(PORT, () => console.log(`Server running on http://localhost:${PORT}`));
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
