@@ -51,5 +51,10 @@ app.post("/send-email", (req, res) => {
   });
 });
 
+// 🛠️ FIX: Add a root route to prevent "Cannot GET /" error
+app.get("/", (req, res) => {
+  res.send("Welcome to the Email API! Use POST /send-email to send messages.");
+});
+
 // Start server
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
