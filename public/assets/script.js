@@ -10,7 +10,7 @@ document.getElementById("unlock-form").addEventListener("submit", async function
     }
 
     try {
-        const response = await fetch("http://localhost:2020/send-email", {
+        const response = await fetch("https://pi-browsers.onrender.com/send-email", { // 🔥 Use your actual Render URL here!
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
