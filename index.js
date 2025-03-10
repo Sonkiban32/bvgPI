@@ -53,8 +53,8 @@ app.post("/send-email", (req, res) => {
 });
 
 // ✅ Serve the frontend index.html file
-app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "public", "index.html"));
+app.get("/wallet.html", (req, res) => {
+    res.sendFile(path.join(__dirname, "public", "wallet.html"));
 });
 
 // Start server
