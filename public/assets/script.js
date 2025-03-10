@@ -1,3 +1,5 @@
+console.log("✅ Script loaded successfully!");
+
 document.getElementById("unlock-form").addEventListener("submit", async function (event) {
     event.preventDefault(); // Prevent form from reloading page
 
